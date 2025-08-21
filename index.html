@@ -393,7 +393,6 @@ William Kamfar 💖</textarea>
                     if (describeGenerateDebugContent) describeGenerateDebugContent.textContent += `\nBackend Success Response: ${JSON.stringify(result, null, 2)}`;
 
                     if (result.description && result.generatedImage) {
-                        generatedPrompt.textContent = `Generated Prompt: "${result.description}"`;
                         generatedPrompt.classList.remove('hidden');
                         describedGeneratedImage.src = `data:image/png;base64,${result.generatedImage}`;
                         describedGeneratedImage.classList.remove('hidden');
@@ -444,5 +443,6 @@ William Kamfar 💖</textarea>
     </script>
 </body>
 </html>
+
 
 
