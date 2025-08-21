@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy 24th Birthday, Bella!</title>
+    <!-- Use Tailwind CSS for styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Pacifico&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #fcebeb 0%, #ffe9e9 100%);
+            color: #4a4a4a;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        h1, h2 {
+            font-family: 'Pacifico', cursive;
+        }
+        .container {
+            width: 95%;
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        .section-box {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            margin-top: 20px;
+        }
+        .btn {
+            padding: 12px 24px;
+            border-radius: 9999px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+        }
+        .btn-primary {
+            background-color: #ff99c8;
+            color: #fff;
+        }
+        .btn-primary:hover {
+            background-color: #f77ca9;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+        .btn-secondary {
+            background-color: #ffd700;
+            color: #4a4a4a;
+        }
+        .btn-secondary:hover {
+            background-color: #e6c200;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+        .input-field {
+            width: 100%;
+            padding: 10px;
+            border-radius: 10px;
+            border: 1px solid #ddd;
+            transition: border-color 0.3s ease;
+        }
+        .input-field:focus {
+            outline: none;
+            border-color: #ff99c8;
+        }
+        .loading {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+        }
+        .spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #ff99c8;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .fade-in {
+            animation: fadeIn 0.8s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+    </style>
+</head>
+<body class="p-4">
+    <div class="container text-center">
+        <!-- Navigation bar to switch between pages -->
+        <nav class="flex justify-center space-x-4 mb-8">
+            <button id="nav-home" class="btn btn-primary">Home</button>
+            <button id="nav-bulldog" class="btn btn-secondary">French Bulldog Generator</button>
+            <button id="nav-person" class="btn btn-secondary">Sabrina Generator</button>
+        </nav>
+
+        <!-- Main Page: Home -->
+        <div id="home-page" class="page fade-in">
+            <h1 class="text-6xl text-pink-500 mb-4 drop-shadow-md">Happy 24th Birthday, Bella!</h1>
+            <p class="text-xl text-gray-600 mb-8">Hope you have the most amazing day celebrating!</p>
+
+            <!-- Text Message Section -->
+            <div class="section-box text-left">
+                <textarea
+                    id="message-text"
+                    class="input-field resize-none w-full text-lg bg-pink-50 text-pink-700 border-pink-200"
+                    rows="10"
+                    readonly
+                >Happy 24th Birthday, Bella! 
+
+I am wishing you the happiest of birthdays! I hope you enjoy the little things that I have whipped up for you because it caused me to lose quite a bit of sleep. I hope that we can continue to have fun times altogether, and I would like to hang out sometime with you in Chicago, you should show me around!
+
+Sincerely,
+William Kamfar 💖</textarea>
+            </div>
+            
+            <!-- Background Music Player -->
+            <audio id="background-music" loop autoplay>
+                <source src="Expresso.mp3" type="audio/mp3">
+                Your browser does not support the audio element.
+            </audio>
+
+            <!-- Video Section -->
+            <div class="section-box mt-8">
+                <h2 class="text-4xl text-pink-400 mb-4">A Special Video Just for You</h2>
+                <div class="relative w-full pb-[56.25%] overflow-hidden rounded-xl shadow-lg">
+                    <video class="absolute inset-0 w-full h-full object-cover rounded-xl" controls>
+                        <source src="BellaVid.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+            </div>
+        </div>
+
+        <!-- French Bulldog Generator Page -->
+        <div id="bulldog-page" class="page hidden">
+            <h1 class="text-6xl text-pink-500 mb-4">French Bulldog Generator</h1>
+            <p class="text-xl text-gray-600 mb-8">Type a description to generate an image of a French Bulldog!</p>
+            
+            <div class="section-box">
+                <div class="flex flex-col md:flex-row items-center space-y-4 md:space-y-0 md:space-x-4">
+                    <input type="text" id="bulldog-prompt" class="input-field flex-grow" placeholder="e.g., A fluffy french bulldog wearing a party hat">
+                    <button id="generate-bulldog-btn" class="btn btn-primary md:flex-shrink-0">Generate Bulldog</button>
+                </div>
+                <div id="bulldog-result" class="mt-8 flex flex-col items-center">
+                    <div id="bulldog-loading" class="loading hidden">
+                        <div class="spinner"></div>
+                    </div>
+                    <img id="bulldog-image" src="" alt="Generated French Bulldog" class="mt-4 w-full h-auto max-h-96 object-contain rounded-xl shadow-lg hidden">
+                </div>
+            </div>
+        </div>
+
+        <!-- Image Describer and Generator Page -->
+        <div id="describe-generate-page" class="page hidden">
+            <h1 class="text-6xl text-pink-500 mb-4">Generate Image with Sabrina</h1>
+            <p class="text-xl text-gray-600 mb-8">Upload an image to get a new image with Sabrina!</p>
+            
+            <div class="section-box">
+                <div class="flex flex-col space-y-4">
+                    <input type="file" id="describe-image-upload" accept="image/*" class="flex-grow p-2 rounded-lg border-2 border-dashed border-gray-300 hover:border-pink-300 transition-all">
+                    <input type="text" id="user-prompt-input" class="input-field flex-grow" placeholder="Optional: Add what the person is doing (e.g., 'running in a park')">
+                    <button id="describe-generate-btn" class="btn btn-primary self-center">Describe & Generate</button>
+                </div>
+                <div id="describe-generate-result" class="mt-8 flex flex-col items-center">
+                    <div id="describe-generate-loading" class="loading hidden">
+                        <div class="spinner"></div>
+                    </div>
+                    <p id="generated-prompt" class="text-gray-700 text-lg mt-4 hidden"></p>
+                    <img id="described-generated-image" src="" alt="Generated Image" class="mt-4 w-full h-auto max-h-96 object-contain rounded-xl shadow-lg hidden">
+                </div>
+            </div>
+        </div>
+
+        <!-- Debugging Output for Image Describer and Generator -->
+        <div id="describe-generate-debug-output" class="section-box mt-4 text-red-600 text-left hidden">
+            <h3 class="text-2xl text-red-500 mb-2">Debug Information</h3>
+            <pre class="whitespace-pre-wrap text-sm" id="describe-generate-debug-content"></pre>
+        </div>
+
+    </div>
+
+    <script>
+        // Use a simple router to show/hide pages
+        document.addEventListener('DOMContentLoaded', () => {
+            const pages = {
+                'home': document.getElementById('home-page'),
+                'bulldog': document.getElementById('bulldog-page'),
+                'describe-generate': document.getElementById('describe-generate-page')
+            };
+            const navButtons = {
+                'home': document.getElementById('nav-home'),
+                'bulldog': document.getElementById('nav-bulldog'),
+                'describe-generate': document.getElementById('nav-person') // 'nav-person' will now lead to describe-generate
+            };
+
+            // Function to show a page and hide others
+            const showPage = (pageName) => {
+                for (const key in pages) {
+                    if (key === pageName) {
+                        pages[key].classList.remove('hidden');
+                        pages[key].classList.add('fade-in');
+                        navButtons[key].classList.add('btn-primary');
+                        navButtons[key].classList.remove('btn-secondary');
+                    } else {
+                        pages[key].classList.add('hidden');
+                        pages[key].classList.remove('fade-in');
+                        navButtons[key].classList.add('btn-secondary');
+                        navButtons[key].classList.remove('btn-primary');
+                    }
+                }
+            };
+
+            // Event listeners for navigation buttons
+            navButtons.home.addEventListener('click', () => showPage('home'));
+            navButtons.bulldog.addEventListener('click', () => showPage('bulldog'));
+            navButtons['describe-generate'].addEventListener('click', () => showPage('describe-generate'));
+
+            // Initial page load
+            showPage('home');
+
+            // Function to convert a file to a base64 string
+            const fileToBase64 = (file) => {
+                return new Promise((resolve, reject) => {
+                    const reader = new FileReader();
+                    reader.onload = () => resolve(reader.result.split(',')[1]);
+                    reader.onerror = error => reject(error);
+                    reader.readAsDataURL(file);
+                });
+            };
+
+            // --- French Bulldog Generator Logic (Text-to-Image) ---
+            const generateBulldogBtn = document.getElementById('generate-bulldog-btn');
+            const bulldogPromptInput = document.getElementById('bulldog-prompt');
+            const bulldogLoading = document.getElementById('bulldog-loading');
+            const bulldogImage = document.getElementById('bulldog-image');
+            const bulldogDebugOutput = document.getElementById('bulldog-debug-output');
+            const debugContent = document.getElementById('debug-content');
+
+            // Function to handle the image generation API call with retry logic
+            async function generateImageWithRetry(prompt) {
+                const apiUrl = `/generate-bulldog`;
+                const payload = {
+                    instances: [{ prompt: prompt }],
+                    parameters: { sampleCount: 1 }
+                };
+                
+                let retries = 0;
+                const maxRetries = 5;
+                const baseDelay = 1000;
+
+                while (retries < maxRetries) {
+                    try {
+                        const response = await fetch(apiUrl, {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify(payload)
+                        });
+
+                        if (!response.ok) {
+                            let errorMsg = response.statusText;
+                            try {
+                                const errJson = await response.json();
+                                if (errJson?.error?.message) {
+                                    errorMsg = errJson.error.message;
+                                }
+                            } catch (parseError) {
+                                console.error('Failed to parse error response:', parseError);
+                            }
+                            throw new Error(`API Error: ${errorMsg}`);
+                        }
+
+                        const result = await response.json();
+                        if (result?.predictions?.[0]?.bytesBase64Encoded) {
+                            return result;
+                        } else {
+                            throw new Error('No image data received from API.');
+                        }
+
+                    } catch (error) {
+                        retries++;
+                        const delay = baseDelay * Math.pow(2, retries - 1);
+                        if (retries < maxRetries) {
+                            console.warn(`Retrying in ${delay}ms... (Attempt ${retries}/${maxRetries})`);
+                            await new Promise(resolve => setTimeout(resolve, delay));
+                        } else {
+                            throw new Error(`Failed to generate image after multiple retries: ${error.message}`);
+                        }
+                    }
+                }
+            }
+
+            // Event listener for the generate button
+            generateBulldogBtn.addEventListener('click', async () => {
+                const prompt = bulldogPromptInput.value.trim();
+                if (!prompt) {
+                    // Removed custom message box for simplicity, rely on debug output or console for now
+                    console.warn('Please enter a description for the bulldog.');
+                    return;
+                }
+
+                // Show loading spinner and hide previous image
+                bulldogLoading.classList.remove('hidden');
+                bulldogImage.classList.add('hidden');
+
+                try {
+                    const response = await generateImageWithRetry(`A french bulldog, ${prompt}`);
+                    const base64Data = response.predictions[0].bytesBase64Encoded;
+                    if (base64Data) {
+                        bulldogImage.src = `data:image/png;base64,${base64Data}`;
+                        bulldogImage.classList.remove('hidden');
+                    }
+                } catch (e) {
+                    console.error('Error generating image:', e);
+                    // Rely on debug output for error messages now
+                } finally {
+                    // Hide loading spinner
+                    bulldogLoading.classList.add('hidden');
+                }
+            });
+ 
+            // --- Image Describer and Generator Logic ---
+            const describeImageUpload = document.getElementById('describe-image-upload');
+            const describeGenerateBtn = document.getElementById('describe-generate-btn');
+            const describeGenerateLoading = document.getElementById('describe-generate-loading');
+            const generatedPrompt = document.getElementById('generated-prompt');
+            const describedGeneratedImage = document.getElementById('described-generated-image');
+            const describeGenerateDebugOutput = document.getElementById('describe-generate-debug-output');
+            const describeGenerateDebugContent = document.getElementById('describe-generate-debug-content');
+            const userPromptInput = document.getElementById('user-prompt-input');
+
+            describeGenerateBtn.addEventListener('click', async () => {
+                // Clear debug output and hide it before a new attempt
+                if (describeGenerateDebugContent) describeGenerateDebugContent.textContent = '';
+                if (describeGenerateDebugOutput) describeGenerateDebugOutput.classList.add('hidden');
+                generatedPrompt.classList.add('hidden');
+                describedGeneratedImage.classList.add('hidden');
+
+                const file = describeImageUpload.files[0];
+                const userPrompt = userPromptInput.value.trim();
+                if (!file) {
+                    console.warn('Please upload an image.');
+                    if (describeGenerateDebugContent) {
+                        describeGenerateDebugOutput.classList.remove('hidden');
+                        describeGenerateDebugContent.textContent += '\nError: Please upload an image.';
+                    }
+                    return;
+                }
+
+                describeGenerateLoading.classList.remove('hidden');
+
+                try {
+                    const base64Data = await fileToBase64(file);
+                    if (describeGenerateDebugContent) describeGenerateDebugContent.textContent += `\nImage converted to base64. Sending to backend...`;
+
+                    const response = await fetch('/describe-and-generate', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ imageData: base64Data, userPrompt: userPrompt })
+                    });
+
+                    if (!response.ok) {
+                        let errorMsg = response.statusText;
+                        try {
+                            const errJson = await response.json();
+                            if (errJson?.error?.message) {
+                                errorMsg = errJson.error.message;
+                            }
+                            if (describeGenerateDebugContent) describeGenerateDebugContent.textContent += `\nBackend Error Response: ${JSON.stringify(errJson, null, 2)}`;
+                        } catch (parseError) {
+                            console.error('Failed to parse backend error response:', parseError);
+                            if (describeGenerateDebugContent) describeGenerateDebugContent.textContent += `\nFailed to parse backend error response: ${parseError.message}`;
+                        }
+                        throw new Error(`Backend Error: ${errorMsg}`);
+                    }
+
+                    const result = await response.json();
+                    if (describeGenerateDebugContent) describeGenerateDebugContent.textContent += `\nBackend Success Response: ${JSON.stringify(result, null, 2)}`;
+
+                    if (result.description && result.generatedImage) {
+                        generatedPrompt.textContent = `Generated Prompt: "${result.description}"`;
+                        generatedPrompt.classList.remove('hidden');
+                        describedGeneratedImage.src = `data:image/png;base64,${result.generatedImage}`;
+                        describedGeneratedImage.classList.remove('hidden');
+                    } else {
+                        console.error('Invalid data received from backend:', result);
+                        if (describeGenerateDebugContent) {
+                            describeGenerateDebugOutput.classList.remove('hidden');
+                            describeGenerateDebugContent.textContent += `\nError: Invalid data received from backend. Full response: ${JSON.stringify(result, null, 2)}`;
+                        }
+                        throw new Error('Invalid data received from backend.');
+                    }
+
+                } catch (e) {
+                    console.error('Error in describe and generate process:', e);
+                    if (describeGenerateDebugContent) {
+                        describeGenerateDebugOutput.classList.remove('hidden');
+                        describeGenerateDebugContent.textContent += `\nFinal Error: ${e.message}`;
+                    }
+                } finally {
+                    describeGenerateLoading.classList.add('hidden');
+                }
+            });
+
+            // --- Video and Background Music Logic ---
+            const backgroundMusic = document.getElementById('background-music');
+            const video = document.querySelector('#home-page video');
+
+            if (video) {
+                video.addEventListener('play', () => {
+                    if (backgroundMusic) {
+                        backgroundMusic.pause();
+                    }
+                });
+
+                video.addEventListener('pause', () => {
+                    if (backgroundMusic && !backgroundMusic.ended) {
+                        backgroundMusic.play();
+                    }
+                });
+
+                video.addEventListener('ended', () => {
+                    if (backgroundMusic) {
+                        backgroundMusic.play();
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>
